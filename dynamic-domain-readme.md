@@ -23,7 +23,7 @@ pip3 install requests
 ## 修改定期映射代码
 1. 修改`update_parse_domain_xxx.py`文件中的账号信息
       + update_parse_domain_aliyun_global.py: 适用于拥有公网ip的服务器，需从阿里云获取ID、Key、subdomain_name、domain_name信息，并替换相应的变量；
-      + update_parse_domain_aliyun_global.py: 适用于拥有公网ip的服务器，需从pubyun获取username、password、hostname信息，并替换相应的变量；
+      + update_parse_domain_pubyun_global.py: 适用于拥有公网ip的服务器，需从pubyun获取username、password、hostname信息，并替换相应的变量；
       + update_parse_domain_pubyun_local.py： 服务器挂在拥有校园局部网ip的路由器下时，可使用该代码，需从pubyun获取username、password、hostname信息，并替换相应的变量；
       
 2. 修改`update_parse_domain.sh`文件信息
