@@ -5,7 +5,7 @@ from requests.auth import HTTPBasicAuth
 from os import popen,getcwd
 from os.path import exists,join,dirname
 import re
-from getrouteip import get_ip
+from getrouteip import get_ip_tl_r473g as get_ip
 
 IP_FILE_PATH='ip.txt'
 IP_FILE_PATH = join(dirname(__file__),IP_FILE_PATH)

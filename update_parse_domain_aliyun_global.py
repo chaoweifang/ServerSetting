@@ -18,12 +18,7 @@ def get_ip_file_content():
 
 #client = AcsClient('ID', 'KEY', 'cn-hangzhou')
 
-def get_internet_ip():
-    cmd = 'curl http://httpbin.org/ip -s silent'
-    cmd_pipe = popen(cmd)
-    cmd_ret = ''.join(cmd_pipe.readlines())
-    regex = r'(\d+\.){3}\d+'
-    return str(re.search(regex, cmd_ret).group(0))
+
 
 #ip = get_internet_ip()
 #print(get_internet_ip())

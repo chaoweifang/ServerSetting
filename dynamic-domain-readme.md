@@ -14,6 +14,10 @@ pip3 install requests
 ```
 以上命令视情况而定，目前仅在python3中测试通过，没有在python2中进行测试
 
+下载`geckodriver`: https://github.com/mozilla/geckodriver/releases, 解压并将`geckodriver`复制至`/usr/local/bin/`目录中：
++ sudo cp geckodriver /usr/local/bin/
++ sudo chmod +x /usr/local/bin/geckodriver
+
 ## 申请域名信息（以pubyun为例）
 1. 进入 http://www.pubyun.com/ 注册账号信息，登录
 2. 申请域名
@@ -31,7 +35,7 @@ pip3 install requests
 # 下面的python路径和py文件修改为实际的绝对路径
 /usr/bin/python3 /home/tools/update_parse_domain_xxx.py > /home/tools/cron002.txt 2>&1 &
 ```
-需保证/home/tools/目录可读写
+需保证'/home/tools/'目录可读写
 
 3. 添加定时任务
 ```bash

@@ -41,8 +41,6 @@
     + 添加内容： 127.0.0.1 xxx
 
 6. dns修改
-    + `sudo rm /etc/resolv.conf`
-    + `sudo touch /etc/resolv.conf`
     + `sudo vim /etc/resolv.conf`
     + 添加：
         - nameserver 114.114.114.114
@@ -53,7 +51,7 @@
         - 打开文件: `sudo vim /etc/NetworkManager/NetworkManager.conf`
         - 在[main] 节点下增加下面的配置： dns=none
         - 重启 NetworkManager： `sudo systemctl restart NetworkManager`
-        - 按照暂时修改的方法进行配置即可, 重启电脑之后就不存在覆盖原来的文件的问题；
+        - 按照暂时修改的方法进行配置即可, 重启电脑或网络不会覆盖`resolv.conf`
 
 7. 修改密码，创建账号
     + 修改密码：`sudo password xxx`
