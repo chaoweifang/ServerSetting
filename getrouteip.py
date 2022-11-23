@@ -15,7 +15,7 @@ def get_native_ip():
     regex = r'(\d+\.){3}\d+'
     return str(re.search(regex, cmd_ret).group(0))
 
-# get ip from internet. you gong wang ip shi ke yong. 
+# get ip from internet. you gong wang ip ke yi shi yong. 
 def get_internet_ip():
     cmd = 'curl http://httpbin.org/ip -s silent'
     cmd_pipe = popen(cmd)
@@ -67,6 +67,7 @@ def get_ip_tl_r473g(browser=None):
         return None
 
 # get router wan ip: TP-LINK TL-R479G+
+# need to specify username and password
 def get_ip_tl_r479g(browser=None):
     options = Options()
     options.add_argument('--headless')
@@ -86,10 +87,10 @@ def get_ip_tl_r479g(browser=None):
         wait.until(lambda driver: driver.find_element('id','login-btn'))
         #print(1)
         # 输入密码
-        js = "document.getElementById('username').value='cwfang'"
+        js = "document.getElementById('username').value='username'"
         browser.execute_script(js)
         #print(2)
-        js = "document.getElementsByClassName('text-text password-text password-hidden login')[0].value='xdu2110'"
+        js = "document.getElementsByClassName('text-text password-text password-hidden login')[0].value='password'"
         browser.execute_script(js)
         #print(3)
         js = "document.getElementById('login-btn').click()"
