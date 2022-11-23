@@ -28,7 +28,8 @@ def get_ip_tl_r473g(browser=None):
     options = Options()
     options.add_argument('--headless')
     # 打开浏览器
-    browser = webdriver.Firefox(options=options)
+    #browser = webdriver.Firefox(options=options)
+    browser = webdriver.Firefox(executable_path="/usr/local/bin/geckodriver", service_log_path=os.path.join(os.path.dirname(__file__),'geckodriver.log'), options=options)
     assert browser
     try:
         # 打开路由器登录网页

@@ -1,7 +1,7 @@
 ## 原理
 1. 使用python http请求库动态更新ip到动态域名免费供应商pubyun.com账户或阿里云付费账户
-2. 每次当ip变化时候就会触发更新
-3. 使用crontab定时任务监控该任务
+2. 当ip变化时触发更新
+3. 使用crontab定时任务监控ip是否发生变化
 
 ## Prerequisite
 系统自带的python3或者制定python3环境装以下包
