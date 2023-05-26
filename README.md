@@ -60,11 +60,7 @@
     + 重装系统时候，若home中已存在新添加账号的目录，需对其归属权进行修改：`sudo chown -R [用户名]:[用户名] [用户名]`
     + 添加密钥：见[服务器密钥登录教程](https://docs.qq.com/doc/DTVdTTUJNcWtvTWJp)
 
-8. 安装zero-tier
-    + 安装： `curl -s https://install.zerotier.com | sudo bash`
-    + 加入zerotier账号： `sudo zerotier-cli join zero-tier-id`
-
-9. 显卡驱动安装
+8. 显卡驱动安装
     + 选择合适的版本，下载[驱动文件](https://www.nvidia.com/download/index.aspx?lang=en-us)
     + 执行以下指令进行安装：
         - `sudo service lightdm stop` //关闭图形界面
@@ -81,11 +77,10 @@
 
 11. 时区设置：`sudo timedatectl set-timezone Asia/ShangHai`
 
-12. 禁用账号密码远程登陆
-    + 修改/etc/ssh/sshd_config： PasswordAuthentication no
+12. 禁用账号密码远程登陆并keep alive
+    + 修改/etc/ssh/sshd_config： PasswordAuthentication no; TCPKeepAlive yes; ClientAliveInterval 0; ClientAliveCountMax 3
     + 重启sshd服务： `sudo service sshd restart`
     + 检查ssh连接能否正常登录服务器
-
 13. 分配swap空间
     + `free -m`
     + `sudo swapoff -a`
@@ -97,3 +92,109 @@
     + `free -h`
     + 然后编辑/etc/fstab, 在末尾添加： /swapfile none swap sw 0 0
     + `free -m`
+
+14. 禁止自动休眠：
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+
+
+16. 常用软件和代码库安装：
+
+- sudo apt install xfce4
+
+- sudo apt install autossh
+
+- x2goserver
+
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:x2go/stable
+sudo apt-get update
+sudo apt-get install x2goserver x2goserver-xsession
+
+- Anaconda: https://www.anaconda.com/download#downloads
+wget https://repo.anaconda.com/archive/Anaconda3-2023.03-1-Linux-x86_64.sh
+chmod +x ./xxx.sh
+sudo ./xxx.sh
+
+- sudo apt install tmux
+
+- sudo apt install git
+
+- sudo apt install vim
+
+- sudo apt instal python-pip3
+
+- pytorch: https://pytorch.org/get-started/locally/
+
+- sudo pip install opencv-contrib-python
+
+- sudo pip install selenium
+
+- geckodriver: https://github.com/mozilla/geckodriver/releases
+
+17. pip 换源，~/.pip/pip.conf
+[global]
+index-url=https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host=mirrors.aliyun.com
+
+18. conda换源：
+
+conda config --show-sources
+
+vim .condarc添加各种镜像源后：
+channels:
+  - defaults
+show_channel_urls: true
+channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+
+
+19. apt 换源:
+
+lsb_release -a
+
+cd /etc/apt/
+
+sudo cp sources.list sources.list_bak
+
+sudo vim sources.list     ## 输入如下内容，保存退出
+
+deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-security main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-updates main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-proposed main restricted universe multiverse
+deb http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+deb-src http://mirrors.aliyun.com/ubuntu/ jammy-backports main restricted universe multiverse
+
+sudo apt update
+
+20. 常用指令：
+
+- 文件查看
+    + 查看当前目录下一级文件夹大小： sudo ls | xargs sudo du -ksh
+    + 查看当前目录占用的总磁盘大小： sudo du -sh
+
+- 端口
+    + 端口占用情况：sudo netstat -ap | grep port
+    + 查看占用端口的PID: sudo lsof -i :7002
+
+- 休眠
+    + 禁用：sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+    + 恢复：sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target

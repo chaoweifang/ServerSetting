@@ -5,8 +5,8 @@ After=network.target network-online.target ssh.service
 
 [Service]
 Environment="AUTOSSH_GATETIME=0"
-User=zy
-ExecStart=/usr/bin/autossh -p 7002 -M 10003 -NR '192.168.1.3:5903:127.0.0.1:22' cwfang@cwailab1.f3322.net
+User=root
+ExecStart=/usr/bin/autossh -p 7002 -M 10218 -NR '192.168.1.3:5903:127.0.0.1:22' cwfang@cwailab1.f3322.net
 
 ExecStop=/usr/bin/killall -s KILL autossh
 
