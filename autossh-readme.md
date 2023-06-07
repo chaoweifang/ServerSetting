@@ -14,31 +14,31 @@
 `ssh [服务器A用户名]@[中转机IP] -p [转发端口]`
 
 ## 流程
-1. 进入相应转跳机的服务器,如阿里云的轻量应用服务器, 开放对应的**转发端口**的防火墙
-    - 参考网页 : [防火墙](https://help.aliyun.com/document_detail/59086.html)
-    - 或者进入server2：
+1. 登录中转机,如阿里云轻量应用服务器, 开放对应**转发端口**的防火墙
+    - 阿里云轻量应用服务器参考网页 : [防火墙](https://help.aliyun.com/document_detail/59086.html)
+    - 或者进入中转机：
         + 打开转发端口的防火墙：
-        + 方式1
+            - 方式1
         
-            `sudo firewall-cmd --zone=public --add-port=转发端口/tcp --permanent`
+                `sudo firewall-cmd --zone=public --add-port=转发端口/tcp --permanent`
 
-            `sudo firewall-cmd --reload`
+                `sudo firewall-cmd --reload`
 
-        + 方式2
+            - 方式2
         
-            `sudo ufw enable`
+                `sudo ufw enable`
 
-            `sudo ufw allow 转发端口/tcp`
+                `sudo ufw allow 转发端口/tcp`
 
-            `sudo ufw reload`
+                `sudo ufw reload`
 
-    - 设置GatewayPorts yes: 
+        + 设置GatewayPorts yes: 
     
-        ` sudo vim /etc/ssh/sshd_config`
+            ` sudo vim /etc/ssh/sshd_config`
 
-        ` 修改： GatewayPorts yes`
+            ` 修改： GatewayPorts yes`
 
-        ` sudo service sshd restart`
+            ` sudo service sshd restart`
 
 2. 在服务器A的linux上安装autossh： 
     `sudo apt install autossh`
@@ -47,16 +47,16 @@
 
     `ssh-keygen -t rsa`
 
-    `ssh-copy-id [中转机username]@[中转机IP]`
+4. 如果可以使用ssh从服务器A连接中转机，则执行：`ssh-copy-id [中转机username]@[中转机IP]`； 否则，联系管理员手动添加公钥。
     
-4. 在服务器A上输入如下指令, 
+5. 在服务器A上输入如下指令, 
     - 测试autossh:
-        `autossh -p sshport -M 监听端口 -NR '\*:转发端口:127.0.0.1:22' [中转机username]@[中转机IP]`
+        `autossh -p sshport -M 监听端口 -NR '*:转发端口:127.0.0.1:22' [中转机username]@[中转机IP]`
     - 在**中转机**上测试对应端口是否处于监听状态: 
         `netstat -tupln`
-    - 然后结束在服务器A上的autossh命令,进入编写守护进程,使得服务器A在开机联网以后能够自动autossh
+    - 结束在服务器A上的autossh命令
    
-5. 在**服务器A**上编写守护进程
+6. 在**服务器A**上编写守护进程, 使得服务器A在开机联网以后能够自动autossh
     - 参考网页 : [为 autoSSH 端口转发配置 systemd 守护进程](https://roriri.one/2019/01/19/autossh/)
     - 守护进程模板，见"autossh-nwct.service":
     
