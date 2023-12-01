@@ -2,6 +2,7 @@
 1. 使用python http请求库动态更新ip到动态域名免费供应商pubyun.com账户或阿里云付费账户
 2. 当ip变化时触发更新
 3. 使用crontab定时任务监控ip是否发生变化
+4. 部分命令视情况而定，目前仅在python3中测试通过
 
 ## Prerequisite
 系统自带的python3或者制定python3环境装以下包
@@ -12,7 +13,6 @@ pip3 install aliyun-python-sdk-alidns
 pip3 install selenium
 pip3 install requests
 ```
-以上命令视情况而定，目前仅在python3中测试通过，没有在python2中进行测试
 
 下载`geckodriver`: https://github.com/mozilla/geckodriver/releases, 解压并将`geckodriver`复制至`/usr/local/bin/`目录中：
 + sudo cp geckodriver /usr/local/bin/
